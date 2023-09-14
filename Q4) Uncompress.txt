@@ -1,0 +1,52 @@
+Q4) Users can put a compressed file at any path of the linux file system. The name of the file will be research and the extension will be of compression type, example for gzip type extension will be .gz.
+You have to find the file and check the compression type and uncompress it.
+
+Soln: 
+
+Step 1: Open a terminal and create a file (sudo nano search.sh) for writing the following shell script
+
+      
+       #!/bin/bash
+
+	find_files=($(sudo find / -name "research.*" -type f 2>/dev/null))
+
+	for find_file in "${find_files[@]}"; do
+  		extension="${find_file##*.}"
+
+  	case "$extension" in
+    	gz)
+      	 gzip -d "$find_file"
+         echo "file uncompressed successfully"
+      	;;
+        xz)
+         xz -d "$find_file"
+         echo "file uncompressed successfully"
+        ;;
+        zip)
+         unzip "$find_file"
+         echo "file uncompressed successfully"
+        ;;
+        bz2)
+         bzip2 -d "$find_file"
+         echo "file uncompressed successfully"
+        ;;
+        *)
+         echo "file not found: $find_file"
+        ;;
+   esac
+ done
+ 
+ 
+Step 2: Save the file and make it executable by granting the following permission
+       
+        chmod +x search.sh
+        
+        
+Step 3: Run the script by using the following command
+ 
+        sudo ./search.sh
+        
+        Now this script will search for any compressed file named "research" and uncompress it.
+       
+       
+      

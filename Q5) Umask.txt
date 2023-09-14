@@ -1,0 +1,21 @@
+Q5) Configure your system in such a way that any user of your system creates a file then there should not be permission to do any activity in that file.
+
+
+Step 1: Open a terminal and we need to set the umask value to 0777
+
+        sudo umask 0777
+        
+         This command changes the default file creation mask for all users on the system.
+         
+         
+Step 2: Now you have to create a file
+
+        touch my_file.txt
+        
+        If you check the permissions of my_file.txt, you will see that it has no permissions for others:
+
+        ls -l my_file.txt
+
+
+The output will look like the following 
+-rw------- 1 username username 0 Sep 14 10:00 my_file.txt

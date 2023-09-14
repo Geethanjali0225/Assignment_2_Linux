@@ -1,0 +1,54 @@
+Q6) Create a service with the name showtime , after starting the service, every minute it should print the current time in a file in the user home directory.
+
+Soln:
+
+
+Step 1: Create a script that will update the file with the current time. You can use a simple shell script for this purpose. Create a file named showtime.sh with the following content:
+
+
+         sudo nano showtime.sh
+         
+         #!/bin/bash
+while true; do
+    date '+%Y-%m-%d %H:%M:%S' > ~/showtime.txt
+    sleep 60
+done
+
+This script continuously updates a file called showtime.txt in the user's home directory with the current date and time, and then sleeps for 60 seconds.
+
+
+Step 2: Make the script executable by running the following command
+
+        chmod +x showtime.sh
+
+Step 3: Next, create a systemd service unit for the "showtime" service. Create a file named showtime.service in the /etc/systemd/system/ directory with the following content:
+
+        [Unit]
+        Description=Showtime Service
+        After=network.target
+
+        [Service]
+        Type=simple
+        ExecStart=/path/to/showtime.sh   #the path where your file named showtime.sh is saved
+
+        [Install]
+        WantedBy=multi-user.target
+        
+        
+Step 4: Once the service unit file is created, reload systemd to make it aware of the new service
+
+         sudo systemctl daemon-reload
+         
+Step 5: Now, you can start and enable the "showtime" service to make it run at boot and continuously update the file with the current time:
+
+
+        sudo systemctl start showtime
+        sudo systemctl enable showtime
+
+Step 6: Once everything is done, stop the process by the following command
+
+        sudo systemctl stop showtime
+        
+
+
+
