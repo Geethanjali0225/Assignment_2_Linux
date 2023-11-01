@@ -27,7 +27,7 @@ Step 3: We need to update the host name in the configuration file, to do that we
               
               inet_interfaces=loopback-only
                
-              mydestination=$myhostname , geethanjali.com , localhost.singh.com , , localhost
+              mydestination=$myhostname, geethanjali.com, localhost.geethanjali, localhost
               
               
 Step 4: Open file /etc/hosts and add myhostname 
