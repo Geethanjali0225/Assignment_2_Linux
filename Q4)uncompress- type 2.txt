@@ -6,4 +6,4 @@ Step 1: Open a terminal
 Step 2: find / -name "research.gz" -exec gunzip {} \;
 The above command is for the extension .gz, if the file has the extension zip then the command would be
         
-        find / -name "research.zip" -execute unzip {} \;
+        find / -name "research.zip" -exec unzip {} \;
