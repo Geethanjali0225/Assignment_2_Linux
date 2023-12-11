@@ -10,4 +10,9 @@ The above command is for the extension .gz, if the file has the extension zip th
 
  or
 
- find / -type f \( -name "research.zip" -o -name "research.tar.gz" -o -name "research.rar" \) -exec unzip {} \;
+ find / -type f \( -name "research.zip" -o -name "research.tar.gz" -o -name "research.rar" \) -exec unzip {} \
+
+or 
+
+find / -type f -name 'research.*' \( -iname "*.zip" -exec unzip {} \; -o -iname "*.tar" -exec tar -xf {} \; -o -iname "*.gz" -exec gunzip {} \; -o -iname "*.bz2" -exec bunzip2 {} \; -o -iname "*.xz" -exec unxz {} \; \)
+
